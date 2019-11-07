@@ -1,27 +1,35 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Cocktails</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @cocktails.each do |cocktail| %>
-      <tr>
-        <td><%= cocktail.name %></td>
-        <td><%= link_to 'Show', cocktail %></td>
-        <td><%= link_to 'Edit', edit_cocktail_path(cocktail) %></td>
-        <td><%= link_to 'Destroy', cocktail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container">
+  <h1>Cocktails</h1>
+  <div class="row">
+  <% @cocktails.each do |cocktail| %>
+    <div class="col-4">
+      <div class="flat-card" style="background-image: url(<%= cocktail.image_url %>)">
+        <div class="flat-card-content __web-inspector-hide-shortcut__">
+            <div class="flat-card-title">
+              <h4><%= cocktail.name %></h4>
+            </div>
+        </div>
+        <div class="flat-card-actions">
+            <%= link_to '', cocktail, class: "far fa-eye" %>
+            <%= link_to 'Edit', edit_cocktail_path(cocktail) %>
+            <%= link_to 'Destroy', cocktail, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-warning" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
 
-<br>
+
+
+
+
+
+
+
+<!--  -->
 
 <%= link_to 'New Cocktail', new_cocktail_path %>
