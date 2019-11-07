@@ -15,6 +15,7 @@ class DosesController < ApplicationController
   # GET /doses/new
   def new
     @dose = Dose.new
+    @cocktail = Cocktail.find(params[:cocktail_id])
   end
 
   # GET /doses/1/edit
@@ -25,10 +26,11 @@ class DosesController < ApplicationController
   # POST /doses.json
   def create
     @dose = Dose.new(dose_params)
+    @cocktail = Cocktail.find(params[:cocktail_id])
 
     respond_to do |format|
       if @dose.save
-        format.html { redirect_to @dose, notice: 'Dose was successfully created.' }
+        format.html { redirect_to @cocktail, notice: 'Dose was successfully created.' }
         format.json { render :show, status: :created, location: @dose }
       else
         format.html { render :new }
@@ -54,9 +56,10 @@ class DosesController < ApplicationController
   # DELETE /doses/1
   # DELETE /doses/1.json
   def destroy
+    @cocktail = @dose.cocktail
     @dose.destroy
     respond_to do |format|
-      format.html { redirect_to doses_url, notice: 'Dose was successfully destroyed.' }
+      format.html { redirect_to @cocktail, notice: 'Dose was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
